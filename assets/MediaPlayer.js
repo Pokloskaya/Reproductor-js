@@ -1,9 +1,17 @@
 class MediaPlayer {
     constructor(config) {
       this.media = config.el;
-      this.plugins = config.plugins || [];
+      this.plugins = config.plugins || []; //array vacio para que funcione cuando no hay plugins
+
+      this._initPlugins();
     }
   
+    _initPlugins(){
+      this.plugins.forEach(plugin => {
+        plugin.run(this);
+      });
+    }
+
     play() {
       this.media.play();
     }
